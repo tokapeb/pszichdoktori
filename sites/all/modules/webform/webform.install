@@ -147,7 +147,7 @@ function webform_schema() {
       'name' => array(
         'description' => 'The label for this component.',
         'type' => 'varchar',
-        'length' => 255,
+        'length' => 2550,
       ),
       'type' => array(
         'description' => 'The field type of this component (textfield, select, hidden, etc.).',
@@ -830,4 +830,11 @@ function webform_update_7319(&$sandbox) {
  */
 function webform_update_7320() {
   db_query("UPDATE {file_managed} SET status = 1 WHERE fid IN (SELECT fid FROM {file_usage} WHERE module = :module_name)", array(':module_name' => 'webform'));
+}
+
+function webform_update_7330() {
+  db_change_field('webform_component', 'name', 'name', array(
+    'type' => 'varchar',
+    'length' => 2550,
+  ));
 }
